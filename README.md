@@ -1,4 +1,6 @@
 # Membres de l'équipe
 VARELA TAVARES Catia L3 MIAGE
+
 BOSSELUT Jauris L3 MIAGE
+
 REOULET Nicolas L3 MIAGE
