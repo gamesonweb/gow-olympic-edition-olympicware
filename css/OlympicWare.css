@@ -1,0 +1,32 @@
+.game {
+    display: inline-block;
+    margin: 10px;
+}
+.game img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px ;
+    border: rgb(0, 0, 0) 3px solid;
+}
+.game .title {
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: url("/asset/le-curseur.png"), auto;
+}
+#button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+}
+
