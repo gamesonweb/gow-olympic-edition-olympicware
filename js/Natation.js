@@ -65,7 +65,7 @@ const createScene = function () {
     const water = BABYLON.MeshBuilder.CreateBox("water", { width: 9.8, height: 0.9, depth: 19.8 }, scene);
     water.position.y = -0.42; // Positionner l'eau légèrement au-dessus du fond de la piscine
     water.material = new BABYLON.StandardMaterial("waterMaterial", scene);
-    water.material.diffuseTexture = new BABYLON.Texture("/asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
+    water.material.diffuseTexture = new BABYLON.Texture("./asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
     water.material.alpha = 0.6; // Transparence de l'eau
     water.waterColor = new BABYLON.Color3(0.1, 0.1, 0.6);
 
@@ -137,7 +137,7 @@ const createScene = function () {
     }));
 
     // Load hero character and play animation
-    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Nageur3.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+    BABYLON.SceneLoader.ImportMesh("", "./asset/", "Nageur3.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
         var swimmer = newMeshes[0];
         swimmer.position = new BABYLON.Vector3(1.5, -1.3, -8.6); // Positionner le nageur au centre de la piscine
         var swimmer2 = swimmer.clone("swimmer2");

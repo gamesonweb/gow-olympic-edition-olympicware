@@ -19,7 +19,7 @@ var createScene = function () {
     var skybox = BABYLON.MeshBuilder.CreateBox("skybox", { size: 1000 }, scene);
     var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
     skyboxMaterial.backFaceCulling = false;
-    skyboxMaterial.reflectionTexture = new BABYLON.Texture("/asset/textures/TropicalSunnyDay_nz.jpg", scene);
+    skyboxMaterial.reflectionTexture = new BABYLON.Texture("./asset/textures/TropicalSunnyDay_nz.jpg", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
     skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
     skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -29,7 +29,7 @@ var createScene = function () {
     const water = BABYLON.MeshBuilder.CreateBox("water", { width: 900, height: 1, depth: 900 }, scene);
     water.position.y = -0.42; // Positionner l'eau légèrement au-dessus du fond de la piscine
     water.material = new BABYLON.StandardMaterial("waterMaterial", scene);
-    water.material.diffuseTexture = new BABYLON.Texture("/asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
+    water.material.diffuseTexture = new BABYLON.Texture("./asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
     water.material.alpha = 0.4; // Transparence de l'eau
     water.waterColor = new BABYLON.Color3(0, 0, 221 / 255);
     water.windForce = -10;
@@ -48,7 +48,7 @@ var createScene = function () {
     }));
 
     // Importer le voilier
-    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Voilier.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "./asset/", "Voilier.glb", scene, function (newMeshes) {
         var voilier = newMeshes[0];
         voilier.position = new BABYLON.Vector3(0, 1.2, 45);
         scene.registerBeforeRender(function () {
@@ -67,7 +67,7 @@ var createScene = function () {
             cylinder.position.x = Math.random() * 70 - 30; // Random x position between -40 and 40
             cylinder.position.z = Math.random() * 80 - 40; // Random z position between -40 and 40
             cylinder.material = new BABYLON.StandardMaterial("cylinderMaterial", scene);
-            cylinder.material.diffuseTexture = new BABYLON.Texture("/asset/textures/albedo.png", scene); // Set cylinder texture to bois.jpg
+            cylinder.material.diffuseTexture = new BABYLON.Texture("./asset/textures./albedo.png", scene); // Set cylinder texture to bois.jpg
         }
 
         // Keyboard events

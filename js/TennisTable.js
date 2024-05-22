@@ -1,115 +1,84 @@
- // Récupérer l'ancre URL
- const hash = window.location.hash;
+var canvas = document.createElement("canvas");
+canvas.id = "tennis";
+const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+const hash = window.location.hash; // Declare the hash variable and assign it the value of the URL anchor
 
-var canvas = document.getElementById("tennis");
-var ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth - 50;
-canvas.height = window.innerHeight - 50;
-var ballRadius = 10;
-var x = canvas.width/2;
-var y = canvas.height-30;
-var dx = 2;
-var dy = -2;
-var paddleHeight = 200;
-var paddleWidth = 100;
-var paddleX = canvas.width / 2 - 50;
-var rightPressed = false;
-var leftPressed = false;
-var tableImage = new Image();
-var image2 = new Image();
+// Add your code here matching the playground format
+const createScene = function () {
+    const scene = new BABYLON.Scene(engine);
+    // Créer la caméra
+    const camera = new BABYLON.ArcRotateCamera("camera", 1, 1, 1, new BABYLON.Vector3(0, 0, 0));
+    camera.setPosition(new BABYLON.Vector3(0, 4.3, 8));
+    camera.attachControl(canvas, false);
+    camera.inputs.clear();
+    // Create the light
+    const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
 
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
+    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Table.glb", scene, function (newMeshes) {
+        var table = newMeshes[0];
+        camera.target = table;
+    });
 
-function keyDownHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = true;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = true;
-    }
-}
+    // Create the tennis ball
+    const ball = BABYLON.MeshBuilder.CreateSphere("ball", { diameter: 0.2 }, scene);
+    ball.position.y = 2.8;
+    ball.position.z = 4; // Adjust the position of the ball
 
-function keyUpHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = false;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = false;
-    }
-}
+    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Raquette.glb", scene, function (newMeshes) {
+        var raquette = newMeshes[0];
+        raquette.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
+        raquette.position.y = 2;
+        raquette.position.z = 4.2;
 
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
-}
+        var raquette2 = raquette.clone("raquette2");
+        raquette2.position.z = -5.6;
 
-function drawPaddle() {
-    ctx.beginPath();
-    image2.src = "/Jeux/asset/pingpong2.svg";
-    ctx.drawImage(image2,canvas.width / 2 - 50, 30, 100, 200);
-    
-    tableImage.src = "/Jeux/asset/pingpong.svg";
-    ctx.drawImage(tableImage,paddleX,  canvas.height / 2 + 100, paddleWidth, paddleHeight);
-    ctx.closePath();
-}
+        scene.registerBeforeRender(function () {
 
-function drawTable() {
-    // Draw the table
-    ctx.fillStyle = "brown";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+        });
+        // Add keyboard input to move the first racket with its handle 
+        scene.onKeyboardObservable.add((kbInfo) => {
+            switch (kbInfo.type) {
+                case BABYLON.KeyboardEventTypes.KEYDOWN:
+                    switch (kbInfo.event.key) {
+                        case "ArrowLeft":
+                            raquette.position.x += 0.1;
+                            break; 
+                        case "ArrowRight":
+                            raquette.position.x -= 0.1;
+                            break;
+                        case "w":
+                            ball.body.applyImpulse(new BABYLON.Vector3(4, 10, 0), ball.getAbsolutePosition());
+                     
+                           
+                    } break;
+            }
+        });
+    });
 
-    // Draw the net
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, canvas.height / 2 - 2, canvas.width, 4);
-}
 
-function draw() {
-    
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawTable();
-    drawBall();
-    drawPaddle();
-    
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-    }
-    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
-        dy = -dy;
-    }
-    else if(y + dy > canvas.height-ballRadius) {
-        if(x > paddleX && x < paddleX + paddleWidth) {
-            dy = -dy;
-        }
-        else {
-            clearInterval(game);
-            alert("GAME OVER");
-            document.location.reload();
-        }
-    }
 
-    if(rightPressed && paddleX < canvas.width-paddleWidth) {
-        paddleX += 3;
-    }
-    else if(leftPressed && paddleX > 0) {
-        tableImage.src = "/Jeux/asset/pingpong2.svg";
-        ctx.drawImage(tableImage,paddleX,  canvas.height / 2 + 100, paddleWidth, paddleHeight);
-        paddleX -= 3;
-    }
-    
-    x += dx;
-    y += dy;
-}
+    return scene;
+};
+const scene = createScene(); //Call the createScene function
 
- // Vérifier si l'ancre URL contient le mot 'tennis'
- if (hash.includes('tennis')) {
-    // Afficher l'ancre URL dans la console
-    console.log(hash);
+// Register a render loop to repeatedly render the scene
+engine.runRenderLoop(function () {
+    scene.render();
+});
 
+// Watch for browser/canvas resize events
+window.addEventListener("resize", function () {
+    engine.resize();
+});
+
+
+if (hash.includes('tennis')) {
     // Montrer le canvas
     canvas.style.display = "block";
-    var game = setInterval(draw, 10);
+    // Set the canvas size to match the window size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.getElementById('menu').appendChild(canvas);
+
 }

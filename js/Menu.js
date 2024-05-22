@@ -14,7 +14,7 @@ buttonElement.style.height = "50px";
 // Add event listener to handle click event
 buttonElement.addEventListener("click", () => {
     // Add sound effect
-    const audio = new Audio("/asset/sons/Mouse_click.wav");
+    const audio = new Audio("./asset/sons/Mouse_click.wav");
     audio.play();
     // Check if the rectangle element already exists
     const rectangleElement = document.getElementById("rectangle");
@@ -57,7 +57,7 @@ buttonElement.addEventListener("click", () => {
         // Append the image element to the button
         button1Element.appendChild(imageElement);
         button1Element.addEventListener("click", () => {
-            const audio = new Audio("/asset/sons/Mouse_click.wav");
+            const audio = new Audio("./asset/sons/Mouse_click.wav");
             audio.play();
         });
 
@@ -68,7 +68,7 @@ buttonElement.addEventListener("click", () => {
         button2Element.style.right = "50%";
         button2Element.style.transform = "translate(50%, -50%)";
         const image2Element = document.createElement("img");
-        image2Element.src = "/asset/icones/icons8-haut-parleur-32.png";
+        image2Element.src = "./asset/icones/icons8-haut-parleur-32.png";
         image2Element.alt = "Son";
         image2Element.style.width = "50px";
         image2Element.style.height = "50px";
@@ -80,7 +80,7 @@ buttonElement.addEventListener("click", () => {
                 audio.muted = true;
             });
             // Change the image of the button
-            image2Element.src = "/asset/icones/icons8-pas-de-son-32.png";
+            image2Element.src = "./asset/icones/icons8-pas-de-son-32.png";
             image2Element.alt = "Muted";
         });
 
@@ -91,15 +91,15 @@ buttonElement.addEventListener("click", () => {
         button3Element.style.left = "50%";
         button3Element.style.transform = "translate(-50%, -50%)";
         const image3Element = document.createElement("img");
-        image3Element.src = "/asset/icones/icons8-accueil-48.png";
+        image3Element.src = "./asset/icones/icons8-accueil-48.png";
         image3Element.alt = "Accueil";
         image3Element.style.width = "50px";
         image3Element.style.height = "50px";
         button3Element.appendChild(image3Element);
         button3Element.addEventListener("click", () => {
-            const audio = new Audio("/asset/sons/Mouse_click.wav");
+            const audio = new Audio("./asset/sons/Mouse_click.wav");
             audio.play();
-            window.location.href = "/html/OW_Lancement.html";
+            window.location.href = "./html/OW_Lancement.html";
         });
 
         // Add the title and buttons to the rectangle element
@@ -161,7 +161,7 @@ dropdownElement.appendChild(listItem3);
 dropdownElement.appendChild(listItem4);
 dropdownElement.appendChild(listItem5);
 
-// Add event listeners to show/hide the dropdown
+// Add event listeners to show./hide the dropdown
 succesElement.addEventListener("mouseenter", () => {
     dropdownElement.style.display = "block";
 });

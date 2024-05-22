@@ -20,7 +20,7 @@ var createScene = function () {
     // Create a skybox
     var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
     skyboxMaterial.backFaceCulling = false;
-    skyboxMaterial.reflectionTexture = new BABYLON.Texture("/asset/textures/TropicalSunnyDay_nz.jpg", scene);
+    skyboxMaterial.reflectionTexture = new BABYLON.Texture("./asset/textures/TropicalSunnyDay_nz.jpg", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
     skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
     skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -63,7 +63,7 @@ var createScene = function () {
 
     
     // Importer le ballon de foot
-    BABYLON.SceneLoader.ImportMesh("", "/asset/import/", "Ballon.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Ballon.glb", scene, function (newMeshes) {
         var ballon = newMeshes[0];
         ballon.position = new BABYLON.Vector3(0, 1, 40);
         ballon.isPickable = true;
@@ -102,7 +102,7 @@ var createScene = function () {
     });
 
     //Importer le goal
-    BABYLON.SceneLoader.ImportMesh("", "/asset/import/", "Goal.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Goal.glb", scene, function (newMeshes) {
         var goal = newMeshes[0];
         goal.position = new BABYLON.Vector3(0, 0, -10);
     });

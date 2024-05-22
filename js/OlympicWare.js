@@ -18,13 +18,13 @@ var createScene = function () {
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 2;
     // Sound
-    var sound = new BABYLON.Sound("sound", "/asset/sons/", scene, null, {
+    var sound = new BABYLON.Sound("sound", "./asset/sons/", scene, null, {
         loop: true,
         autoplay: true
     });
     // Import mesh
     //<a href="https://fr.freepik.com/vecteurs-libre/illustration-stade-football-football-plat_13379934.htm#from_view=detail_alsolike">Image de freepik</a>
-    BABYLON.SceneLoader.ImportMesh("", "/asset/import/", "Accueil.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Accueil.glb", scene, function (newMeshes) {
         var fond = newMeshes[0];
         fond.position = new BABYLON.Vector3(0, 0, 3.1);
         fond.scaling.x = 3.4;
@@ -65,7 +65,7 @@ var createScene = function () {
     title.fontSize = 68;
     title.top = "-300px"; // Set the position in the y-axis
     advancedTexture.addControl(title);
-    const audio = new Audio("/asset/sons/Mouse_click.wav");
+    const audio = new Audio("./asset/sons/Mouse_click.wav");
     //Bouton Démarrer
     var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "Commencer");
     button1.width = "150px"
@@ -98,12 +98,12 @@ var createScene = function () {
 
         button2.onPointerUpObservable.add(function () {
             audio.play();
-            window.location.href = "/html/OW_ScenePrincipale.html"; // Replace with the URL of your choice 1 page
+            window.location.href = "./html/OW_ScenePrincipale.html"; // Replace with the URL of your choice 1 page
         });
 
         button3.onPointerUpObservable.add(function () {
             audio.play();
-            window.location.href = "/html/OW_Galerie.html"; // Replace with the URL of your choice 2 page
+            window.location.href = "./html/OW_Galerie.html"; // Replace with the URL of your choice 2 page
         });
 
         var button4 = BABYLON.GUI.Button.CreateSimpleButton("but4", "Retour");

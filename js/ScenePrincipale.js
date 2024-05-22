@@ -63,7 +63,7 @@ const createScene = function () {
   }
 
   // Load hero character and play animation
-  BABYLON.SceneLoader.ImportMesh("", "/asset/import/", "Perso.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+  BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Perso.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
     var hero = newMeshes[0];
 
     //Scale the model down        
@@ -137,20 +137,20 @@ const createScene = function () {
   }
 
   // Au bout de 5 secondes, rediriger vers un site au hasard avec un paramètre aléatoire
-  const params = ["arc", "tennis", "natation","golf","foot","escalade","voile","halterophilie "]; // Tableau des paramètres possibles
+  const params = ["arc", "tennis", "natation","golf","foot","escalade","voile","halterophilie","cyclisme"]; // Tableau des paramètres possibles
   const randomParam = params[Math.floor(Math.random() * params.length)]; // Sélectionner un paramètre aléatoire
   let redirectionCounter = 0; // Compteur de redirections
 
   const redirect = function () {
     if (redirectionCounter < 8) { // Vérifier si le nombre de redirections est inférieur à 8
-      window.location.href = "/html/OlympicWare.html#" + randomParam;
+      window.location.href = "./html/OlympicWare.html#" + randomParam;
       redirectionCounter++;
       console.log("Nombre de redirections: " + redirectionCounter); // Afficher le nombre de redirections
       counterElement.textContent = " Nombre de redirections: " + redirectionCounter;
     }
     else {
       console.log("Nombre de redirections maximum atteint.");
-      window.location.href = "/html/OW_Lancement.html";
+      window.location.href = "./html/OW_Lancement.html";
     }
   };
 

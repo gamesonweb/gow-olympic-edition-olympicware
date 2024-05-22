@@ -1,108 +1,107 @@
-// Create a canvas element
-const canvas = document.getElementById('arc');
-canvas.width = innerWidth - 100;
-canvas.height = innerHeight - 100;
-const ctx = canvas.getContext('2d');
+//import * as BABYLON from 'babylonjs';
+var canvas = document.createElement("canvas");
+canvas.id = "arc";
+const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine 
+const hash = window.location.hash;
 
-// Create a moving point
-let x = canvas.width / 2;
-let y = canvas.height / 2;
-let dx = 0.75;
-let dy = 0.75;
+const createScene = function () {
+  const scene = new BABYLON.Scene(engine);
+  // Create the camera
+  const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 3, 20, new BABYLON.Vector3(0, 0, 0));
+  camera.attachControl(canvas, true);
+  camera.inputs.clear(); // Disable camera controls
 
-function animate() {
-    requestAnimationFrame(animate);
-    
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw the sky
-    ctx.fillStyle = 'skyblue';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw the target
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 150, 0, Math.PI * 2);
-    ctx.fillStyle = 'white'; 
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 130, 0, Math.PI * 2);
-    ctx.fillStyle = 'black'; 
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2);
-    ctx.fillStyle = 'blue'; 
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 65, 0, Math.PI * 2);
-    ctx.fillStyle = 'red'; 
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI * 2);
-    ctx.fillStyle = 'yellow'; 
-    ctx.fill();
-    ctx.closePath();
-    
-    // Update the position of the point
-    x += dx;
-    y += dy;
-    
-    // Reverse the direction if the point reaches the edge of the target
-    if (x + 10 > canvas.width / 2 + 100 || x - 10 < canvas.width / 2 - 100) {
-        dx = -dx;
-    }
-    if (y + 10 > canvas.height / 2 + 145 || y - 10 < canvas.height / 2 - 145) {
-        dy = -dy;
-    }
-    
-    // Draw the moving point
-    ctx.beginPath();
-    ctx.arc(x, y, 15, 0, Math.PI * 2);
-    ctx.fillStyle = 'transparent'; 
-    ctx.strokeStyle = 'black'; // Set the border color to black
-    ctx.lineWidth = 2; // Set the border width
-    ctx.fill();
-    ctx.stroke(); // Draw the border
+  // Create the light
+  const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
+  light.intensity = 2;
 
-    // Draw a straight line inside the moving point
-    ctx.beginPath();
-    ctx.moveTo(x - 15, y);
-    ctx.lineTo(x + 15, y);
-    ctx.strokeStyle = 'black'; // Set the line color to black
-    ctx.lineWidth = 2; // Set the line width
-    ctx.stroke(); // Draw the line
+  // Create the ellipse
+  const ellipse = BABYLON.MeshBuilder.CreateDisc("ellipse", { radius: 5, tessellation: 32 }, scene);
+  ellipse.position.y = 10;
+  ellipse.position.z = 10;
+  ellipse.material = new BABYLON.StandardMaterial("ellipseMaterial", scene);
+  ellipse.material.diffuseColor = new BABYLON.Color3(1, 1, 1); // Set the color of the ellipse
 
-    ctx.beginPath();
-    ctx.moveTo(x, y - 15);
-    ctx.lineTo(x, y + 15);
-    ctx.strokeStyle = 'black'; // Set the line color to black
-    ctx.lineWidth = 2; // Set the line width
-    ctx.stroke(); // Draw the line
-    ctx.closePath();
+  // Create four smaller ellipses
+  const smallerEllipses = [];
+  const colors = [new BABYLON.Color3(0, 0, 0), new BABYLON.Color3(0, 0, 1), new BABYLON.Color3(1, 0, 0), new BABYLON.Color3(1, 1, 0)];
+  const radiusStep = 1;
 
-    // Draw the moving point
-    ctx.beginPath();
-    ctx.arc(x, y, 10, 0, Math.PI * 2);
-    ctx.fillStyle = 'transparent'; 
-    ctx.strokeStyle = 'black'; // Set the border color to black
-    ctx.lineWidth = 2; // Set the border width
-    ctx.fill();
-    ctx.stroke(); // Draw the border
-    ctx.closePath();
+  for (let i = 0; i < 4; i++) {
+    const smallerEllipse = BABYLON.MeshBuilder.CreateDisc("smallerEllipse" + i, { radius: 5 - (i + 1) * radiusStep, tessellation: 32 }, scene);
+    smallerEllipse.position.y = 10;
+    smallerEllipse.position.z = 10;
+    smallerEllipse.material = new BABYLON.StandardMaterial("smallerEllipseMaterial" + i, scene);
+    smallerEllipse.material.diffuseColor = colors[i];
+    smallerEllipses.push(smallerEllipse);
+  }
+  camera.target = ellipse.position;
 
+  // Create a small transparent circle with black outline
+  const smallCircle = BABYLON.MeshBuilder.CreateDisc("smallCircle", { radius: 0.7, tessellation: 32 }, scene);
+  smallCircle.position.z = 10;
+  smallCircle.material = new BABYLON.StandardMaterial("smallCircleMaterial", scene);
+  smallCircle.material.diffuseColor = new BABYLON.Color3(0, 0.6, 0); // Set the color of the circle
+  smallCircle.material.alpha = 0.5; // Set the transparency of the circle
+  smallCircle.material.wireframe = true; // Display the circle as wireframe
 
+  // Add a timer to return to the previous page after 10 seconds
+  /*setTimeout(function() {
+    window.history.back();
+  }, 5000);*/
+
+  // Add event listener for mouse movement
+  canvas.addEventListener("mousemove", function () {
+
+    // Create a picking ray from the mouse coordinates
+    let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), null);
+    // Perform a pick operation with the ray
+    let hit = scene.pickWithRay(ray);
+    // Get the picked point from the hit result
+    let pickedPoint = hit.pickedPoint;
+
+    // Update the position of the small circle
+    smallCircle.position.x = pickedPoint.x;
+    smallCircle.position.y = pickedPoint.y;
+  });
+  // Add event listener for mouse click
+  canvas.addEventListener("click", function () {
+    const audio = new Audio("./asset/sons./arrow-shot.wav");
+    audio.play();
+    // Create a picking ray from the mouse coordinates
+    let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), null);
+    // Perform a pick operation with the ray
+    let hit = scene.pickWithRay(ray);
+    // Get the picked point from the hit result
+    let pickedPoint = hit.pickedPoint;
+
+    BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Fleche.glb", scene, function (newMeshes) {
+      var fleche = newMeshes[0];
+      fleche.position.x = pickedPoint.x;
+      fleche.position.y = pickedPoint.y;
+      fleche.position.z = 4;
+    });
+  });
+
+  return scene;
+};
+
+const scene = createScene(); // Call the createScene function
+
+// Register a render loop to repeatedly render the scene
+engine.runRenderLoop(function () {
+  scene.render();
+});
+
+// Watch for browser/canvas resize events
+window.addEventListener("resize", function () {
+  engine.resize();
+});
+if (hash.includes('arc')) {
+  // Show the canvas
+  canvas.style.display = "block";
+  // Set the canvas size to match the window size
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.getElementById('menu').appendChild(canvas);
 }
- // Récupérer l'ancre URL
- const hash = window.location.hash;
- // Vérifier si l'ancre URL contient le mot 'tennis'
- if (hash.includes('arc')) {
-    // Afficher l'ancre URL dans la console
-    console.log(hash);
-
-    // Montrer le canvas
-    canvas.style.display = "block";
-    animate();
-
- }
-
-
