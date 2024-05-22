@@ -48,7 +48,7 @@ var createScene = function () {
     }));
 
     // Importer le voilier
-    BABYLON.SceneLoader.ImportMesh("", "./asset/", "Voilier.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Voilier.glb", scene, function (newMeshes) {
         var voilier = newMeshes[0];
         voilier.position = new BABYLON.Vector3(0, 1.2, 45);
         scene.registerBeforeRender(function () {
