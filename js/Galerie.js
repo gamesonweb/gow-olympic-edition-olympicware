@@ -19,12 +19,12 @@ var createScene = function () {
     light.intensity = 0.7;
 
     // Creation des etageres
-   var cube = BABYLON.MeshBuilder.CreateBox("cube", { size: 0.5, height: 50 }, scene);
+    var cube = BABYLON.MeshBuilder.CreateBox("cube", { size: 0.5, height: 50 }, scene);
     cube.position = new BABYLON.Vector3(-4, 2, 0);
     cube.rotation.z = Math.PI / 2;
     // Set the material of the rectangle
     var material = new BABYLON.StandardMaterial("rectangleMaterial", scene);
-    material.diffuseTexture = new BABYLON.Texture("../asset/textures../albedo.png");
+    material.diffuseTexture = new BABYLON.Texture("../asset/textures/albedo.png");
     cube.material = material;
 
     var cube2 = cube.clone("cube2");
@@ -33,26 +33,25 @@ var createScene = function () {
     // GUI
     var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
     var button = BABYLON.GUI.Button.CreateSimpleButton("but", "Retour");
-        button.width = "150px"
-        button.height = "40px";
-        button.color = "black";
-        button.cornerRadius = 10;
-        button.background = "white";
-        button.top = "200px"; // Set the position in the y-axis
-        advancedTexture.addControl(button);
-        button.onPointerUpObservable.add(function () {
-            audio.play();
-            window.location.href = "../index.html"; // Replace with the URL of your choice 1 page
-        });
+    button.width = "150px"
+    button.height = "40px";
+    button.color = "black";
+    button.cornerRadius = 10;
+    button.background = "white";
+    button.top = "200px"; // Set the position in the y-axis
+    advancedTexture.addControl(button);
+    button.onPointerUpObservable.add(function () {
+        audio.play();
+        window.location.href = "../index.html"; // Replace with the URL of your choice 1 page
+    });
     // Create an image for Game 1
     var image1 = new BABYLON.GUI.Image("image1", "../asset/galerie/Tennis.png");
     image1.width = "150px";
     image1.height = "150px";
     image1.left = "-600px"; // Position the image on the left
     image1.top = "-280px"; // Position the image on the top
-    image1.onPointerUpObservable.add(function() {
-        // Code to start Game 1
-        window.location.href = "../html/OlympicWare.html#tennis";
+    image1.onPointerUpObservable.add(function () {
+        window.location.href = "./html/OlympicWare.html#tennis";
     });
     var image1Container = new BABYLON.GUI.Rectangle();
     image1Container.width = "150px";
@@ -61,17 +60,16 @@ var createScene = function () {
     image1Container.color = "white";
     image1Container.left = "-600px"; // Position the image on the left
     image1Container.top = "-280px"; // Position the image on the top
-    advancedTexture.addControl(image1);
     advancedTexture.addControl(image1Container);
+    advancedTexture.addControl(image1);
 
     // Create an image for Game 2
-    var image2 = new BABYLON.GUI.Image("image2", "../asset/galerie../arc.png");
+    var image2 = new BABYLON.GUI.Image("image2", "../asset/galerie/arc.png");
     image2.width = "150px";
     image2.height = "150px";
     image2.left = "-400px"; // Position the image next to the first image
     image2.top = "-280px";
-    image2.onPointerUpObservable.add(function() {
-        // Code to start Game 2
+    image2.onPointerUpObservable.add(function () {
         window.location.href = "../html/OlympicWare.html#arc";
     });
     var image2Container = new BABYLON.GUI.Rectangle();
@@ -81,8 +79,8 @@ var createScene = function () {
     image2Container.color = "white";
     image2Container.left = "-400px"; // Position the image next to the first image
     image2Container.top = "-280px";
-    advancedTexture.addControl(image2);
     advancedTexture.addControl(image2Container);
+    advancedTexture.addControl(image2);
 
     // Create an image for Game 3
     var image3 = new BABYLON.GUI.Image("image3", "../asset/galerie/Escalade.png");
@@ -90,7 +88,7 @@ var createScene = function () {
     image3.height = "150px";
     image3.left = "-200px"; // Position the image next to the second image
     image3.top = "-280px";
-    image3.onPointerUpObservable.add(function() {
+    image3.onPointerUpObservable.add(function () {
         // Code to start Game 3
         window.location.href = "../html/OlympicWare.html#Escalade";
     });
@@ -101,8 +99,8 @@ var createScene = function () {
     image3Container.color = "white";
     image3Container.left = "-200px"; // Position the image next to the second image
     image3Container.top = "-280px";
-    advancedTexture.addControl(image3);
     advancedTexture.addControl(image3Container);
+    advancedTexture.addControl(image3);
 
     // Create an image for Game 4
     var image4 = new BABYLON.GUI.Image("image4", "../asset/galerie/Natation.png");
@@ -110,7 +108,7 @@ var createScene = function () {
     image4.height = "150px";
     image4.left = "0px"; // Position the image next to the third image
     image4.top = "-280px";
-    image4.onPointerUpObservable.add(function() {
+    image4.onPointerUpObservable.add(function () {
         // Code to start Game 4
         window.location.href = "../html/OlympicWare.html#Natation";
     });
@@ -121,8 +119,8 @@ var createScene = function () {
     image4Container.color = "white";
     image4Container.left = "0px"; // Position the image next to the third image
     image4Container.top = "-280px";
-    advancedTexture.addControl(image4);
     advancedTexture.addControl(image4Container);
+    advancedTexture.addControl(image4);
 
     // Create an image for Game 5
     var image5 = new BABYLON.GUI.Image("image5", "../asset/galerie/Voile.png");
@@ -130,7 +128,7 @@ var createScene = function () {
     image5.height = "150px";
     image5.left = "200px"; // Position the image next to the third image
     image5.top = "-280px";
-    image5.onPointerUpObservable.add(function() {
+    image5.onPointerUpObservable.add(function () {
         // Code to start Game 5
         window.location.href = "../html/OlympicWare.html#Voile";
     });
@@ -141,8 +139,8 @@ var createScene = function () {
     image5Container.color = "white";
     image5Container.left = "200px"; // Position the image next to the third image
     image5Container.top = "-280px";
-    advancedTexture.addControl(image5);
     advancedTexture.addControl(image5Container);
+    advancedTexture.addControl(image5);
 
     // Create an image for Game 6
     var image6 = new BABYLON.GUI.Image("image6", "../asset/galerie/Cyclisme.png");
@@ -150,7 +148,7 @@ var createScene = function () {
     image6.height = "150px";
     image6.left = "400px"; // Position the image next to the third image
     image6.top = "-280px";
-    image6.onPointerUpObservable.add(function() {
+    image6.onPointerUpObservable.add(function () {
         // Code to start Game 6
         window.location.href = "../html/OlympicWare.html#Cyclisme";
     });
@@ -161,8 +159,8 @@ var createScene = function () {
     image6Container.color = "white";
     image6Container.left = "400px"; // Position the image next to the third image
     image6Container.top = "-280px";
-    advancedTexture.addControl(image6);
     advancedTexture.addControl(image6Container);
+    advancedTexture.addControl(image6);
 
     // Create an image for Game 7
     var image7 = new BABYLON.GUI.Image("image7", "../asset/galerie/Golf.png");
@@ -170,7 +168,7 @@ var createScene = function () {
     image7.height = "150px";
     image7.left = "600px"; // Position the image next to the third image
     image7.top = "-280px";
-    image7.onPointerUpObservable.add(function() {
+    image7.onPointerUpObservable.add(function () {
         // Code to start Game 7
         window.location.href = "../html/OlympicWare.html#Golf";
     });
@@ -181,8 +179,8 @@ var createScene = function () {
     image7Container.color = "white";
     image7Container.left = "600px"; // Position the image next to the third image
     image7Container.top = "-280px";
-    advancedTexture.addControl(image7);
     advancedTexture.addControl(image7Container);
+    advancedTexture.addControl(image7);
 
     // Create an image for Game 8
     var image8 = new BABYLON.GUI.Image("image8", "../asset/galerie/Foot.png");
@@ -190,7 +188,7 @@ var createScene = function () {
     image8.height = "150px";
     image8.left = "-600px"; // Position the image next to the third image
     image8.top = "-35px";
-    image8.onPointerUpObservable.add(function() {
+    image8.onPointerUpObservable.add(function () {
         // Code to start Game 8
         window.location.href = "../html/OlympicWare.html#foot";
     });
@@ -201,8 +199,8 @@ var createScene = function () {
     image8Container.color = "white";
     image8Container.left = "-600px"; // Position the image next to the third image
     image8Container.top = "-35px";
-    advancedTexture.addControl(image8);
     advancedTexture.addControl(image8Container);
+    advancedTexture.addControl(image8);
 
     return scene;
 };

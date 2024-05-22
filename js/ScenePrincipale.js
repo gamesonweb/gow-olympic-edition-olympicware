@@ -63,7 +63,7 @@ const createScene = function () {
   }
 
   // Load hero character and play animation
-  BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Perso.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
+  BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Perso.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
     var hero = newMeshes[0];
 
     //Scale the model down        
@@ -150,7 +150,7 @@ const createScene = function () {
     }
     else {
       console.log("Nombre de redirections maximum atteint.");
-      window.location.href = "./html/OW_Lancement.html";
+      window.location.href = "../index.html";
     }
   };
 
@@ -158,7 +158,7 @@ const createScene = function () {
 
 
   // Ajouter un compteur de temps
-  let counter = 5;
+ /* let counter = 5;
   const counterElement = document.createElement("div");
   counterElement.style.position = "absolute";
   counterElement.style.top = "10px";
@@ -176,7 +176,7 @@ const createScene = function () {
       redirectionCounter++;
       console.log("Nombre de redirections: " + redirectionCounter);
     }
-  }, 1000);
+  }, 1000);*/
 
   return scene;
 };
