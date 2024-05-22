@@ -54,8 +54,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#tennis";
     });
     var image1Container = new BABYLON.GUI.Rectangle();
-    image1Container.width = "150px";
-    image1Container.height = "150px";
+    image1Container.width = "155px";
+    image1Container.height = "155px";
     image1Container.thickness = 2;
     image1Container.color = "white";
     image1Container.left = "-600px"; // Position the image on the left
@@ -64,7 +64,7 @@ var createScene = function () {
     advancedTexture.addControl(image1);
 
     // Create an image for Game 2
-    var image2 = new BABYLON.GUI.Image("image2", "../asset/galerie/arc.png");
+    var image2 = new BABYLON.GUI.Image("image2", "../asset/galerie/Arc.png");
     image2.width = "150px";
     image2.height = "150px";
     image2.left = "-400px"; // Position the image next to the first image
@@ -73,8 +73,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#arc";
     });
     var image2Container = new BABYLON.GUI.Rectangle();
-    image2Container.width = "150px";
-    image2Container.height = "150px";
+    image2Container.width = "155px";
+    image2Container.height = "155px";
     image2Container.thickness = 2;
     image2Container.color = "white";
     image2Container.left = "-400px"; // Position the image next to the first image
@@ -93,8 +93,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#escalade";
     });
     var image3Container = new BABYLON.GUI.Rectangle();
-    image3Container.width = "150px";
-    image3Container.height = "150px";
+    image3Container.width = "155px";
+    image3Container.height = "155px";
     image3Container.thickness = 2;
     image3Container.color = "white";
     image3Container.left = "-200px"; // Position the image next to the second image
@@ -113,8 +113,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#natation";
     });
     var image4Container = new BABYLON.GUI.Rectangle();
-    image4Container.width = "150px";
-    image4Container.height = "150px";
+    image4Container.width = "155px";
+    image4Container.height = "155px";
     image4Container.thickness = 2;
     image4Container.color = "white";
     image4Container.left = "0px"; // Position the image next to the third image
@@ -133,8 +133,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#voile";
     });
     var image5Container = new BABYLON.GUI.Rectangle();
-    image5Container.width = "150px";
-    image5Container.height = "150px";
+    image5Container.width = "155px";
+    image5Container.height = "155px";
     image5Container.thickness = 2;
     image5Container.color = "white";
     image5Container.left = "200px"; // Position the image next to the third image
@@ -153,8 +153,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#cyclisme";
     });
     var image6Container = new BABYLON.GUI.Rectangle();
-    image6Container.width = "150px";
-    image6Container.height = "150px";
+    image6Container.width = "155px";
+    image6Container.height = "155px";
     image6Container.thickness = 2;
     image6Container.color = "white";
     image6Container.left = "400px"; // Position the image next to the third image
@@ -173,8 +173,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#golf";
     });
     var image7Container = new BABYLON.GUI.Rectangle();
-    image7Container.width = "150px";
-    image7Container.height = "150px";
+    image7Container.width = "155px";
+    image7Container.height = "155px";
     image7Container.thickness = 2;
     image7Container.color = "white";
     image7Container.left = "600px"; // Position the image next to the third image
@@ -193,8 +193,8 @@ var createScene = function () {
         window.location.href = "../html/OlympicWare.html#foot";
     });
     var image8Container = new BABYLON.GUI.Rectangle();
-    image8Container.width = "150px";
-    image8Container.height = "150px";
+    image8Container.width = "155px";
+    image8Container.height = "155px";
     image8Container.thickness = 2;
     image8Container.color = "white";
     image8Container.left = "-600px"; // Position the image next to the third image
