@@ -18,7 +18,6 @@ canvas {
     width: 100%;
     height: 100%;
     touch-action: none;
-    cursor: url("/asset/le-curseur.png"), auto;
 }
 #button {
     display: inline-block;

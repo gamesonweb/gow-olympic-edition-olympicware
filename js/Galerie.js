@@ -42,7 +42,7 @@ var createScene = function () {
         advancedTexture.addControl(button);
         button.onPointerUpObservable.add(function () {
             audio.play();
-            window.location.href = "./html/OW_Lancement.html"; // Replace with the URL of your choice 1 page
+            window.location.href = "./index.html"; // Replace with the URL of your choice 1 page
         });
     // Create an image for Game 1
     var image1 = new BABYLON.GUI.Image("image1", "./asset/galerie/Tennis.png");
