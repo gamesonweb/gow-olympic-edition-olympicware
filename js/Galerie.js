@@ -51,7 +51,7 @@ var createScene = function () {
     image1.left = "-600px"; // Position the image on the left
     image1.top = "-280px"; // Position the image on the top
     image1.onPointerUpObservable.add(function () {
-        window.location.href = "./html/OlympicWare.html#tennis";
+        window.location.href = "../html/OlympicWare.html#tennis";
     });
     var image1Container = new BABYLON.GUI.Rectangle();
     image1Container.width = "150px";
@@ -90,7 +90,7 @@ var createScene = function () {
     image3.top = "-280px";
     image3.onPointerUpObservable.add(function () {
         // Code to start Game 3
-        window.location.href = "../html/OlympicWare.html#Escalade";
+        window.location.href = "../html/OlympicWare.html#escalade";
     });
     var image3Container = new BABYLON.GUI.Rectangle();
     image3Container.width = "150px";
@@ -110,7 +110,7 @@ var createScene = function () {
     image4.top = "-280px";
     image4.onPointerUpObservable.add(function () {
         // Code to start Game 4
-        window.location.href = "../html/OlympicWare.html#Natation";
+        window.location.href = "../html/OlympicWare.html#natation";
     });
     var image4Container = new BABYLON.GUI.Rectangle();
     image4Container.width = "150px";
@@ -130,7 +130,7 @@ var createScene = function () {
     image5.top = "-280px";
     image5.onPointerUpObservable.add(function () {
         // Code to start Game 5
-        window.location.href = "../html/OlympicWare.html#Voile";
+        window.location.href = "../html/OlympicWare.html#voile";
     });
     var image5Container = new BABYLON.GUI.Rectangle();
     image5Container.width = "150px";
@@ -150,7 +150,7 @@ var createScene = function () {
     image6.top = "-280px";
     image6.onPointerUpObservable.add(function () {
         // Code to start Game 6
-        window.location.href = "../html/OlympicWare.html#Cyclisme";
+        window.location.href = "../html/OlympicWare.html#cyclisme";
     });
     var image6Container = new BABYLON.GUI.Rectangle();
     image6Container.width = "150px";
@@ -170,7 +170,7 @@ var createScene = function () {
     image7.top = "-280px";
     image7.onPointerUpObservable.add(function () {
         // Code to start Game 7
-        window.location.href = "../html/OlympicWare.html#Golf";
+        window.location.href = "../html/OlympicWare.html#golf";
     });
     var image7Container = new BABYLON.GUI.Rectangle();
     image7Container.width = "150px";

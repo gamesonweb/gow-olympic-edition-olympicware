@@ -14,7 +14,7 @@ const createScene = function () {
     // Create the light
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
 
-    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Table.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Table.glb", scene, function (newMeshes) {
         var table = newMeshes[0];
         camera.target = table;
     });
@@ -24,7 +24,7 @@ const createScene = function () {
     ball.position.y = 2.8;
     ball.position.z = 4; // Adjust the position of the ball
 
-    BABYLON.SceneLoader.ImportMesh("", "/asset/", "Raquette.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Raquette.glb", scene, function (newMeshes) {
         var raquette = newMeshes[0];
         raquette.scaling = new BABYLON.Vector3(0.5, 0.5, 0.5);
         raquette.position.y = 2;

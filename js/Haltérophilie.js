@@ -42,7 +42,7 @@ var createScene = function () {
     ground.material.diffuseColor = new BABYLON.Color3(0.76, 0.69, 0.57);
     
      // Importer le voilier
-     BABYLON.SceneLoader.ImportMesh("", "./asset/", "Halteres.glb", scene, function (newMeshes) {
+     BABYLON.SceneLoader.ImportMesh("", "../asset/", "Halteres.glb", scene, function (newMeshes) {
         var haltere = newMeshes[0];
         haltere.position.y = 1;
 

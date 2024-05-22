@@ -65,7 +65,7 @@ const createScene = function () {
     const water = BABYLON.MeshBuilder.CreateBox("water", { width: 9.8, height: 0.9, depth: 19.8 }, scene);
     water.position.y = -0.42; // Positionner l'eau légèrement au-dessus du fond de la piscine
     water.material = new BABYLON.StandardMaterial("waterMaterial", scene);
-    water.material.diffuseTexture = new BABYLON.Texture("./asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
+    water.material.diffuseTexture = new BABYLON.Texture("../asset/textures/waterbump.png", scene); // Ajouter une texture à l'eau
     water.material.alpha = 0.6; // Transparence de l'eau
     water.waterColor = new BABYLON.Color3(0.1, 0.1, 0.6);
 

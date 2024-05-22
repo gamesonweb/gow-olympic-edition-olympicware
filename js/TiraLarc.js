@@ -66,7 +66,7 @@ const createScene = function () {
   });
   // Add event listener for mouse click
   canvas.addEventListener("click", function () {
-    const audio = new Audio("./asset/sons./arrow-shot.wav");
+    const audio = new Audio("../asset/sons/arrow-shot.wav");
     audio.play();
     // Create a picking ray from the mouse coordinates
     let ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), null);
@@ -75,7 +75,7 @@ const createScene = function () {
     // Get the picked point from the hit result
     let pickedPoint = hit.pickedPoint;
 
-    BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Fleche.glb", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Fleche.glb", scene, function (newMeshes) {
       var fleche = newMeshes[0];
       fleche.position.x = pickedPoint.x;
       fleche.position.y = pickedPoint.y;

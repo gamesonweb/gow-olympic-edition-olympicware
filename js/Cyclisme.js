@@ -36,17 +36,17 @@ const createScene = function () {
    ground.material = roadmaterial;
   // Créer le décor rocailleux sur les côtés de la route
   const rockyMaterial = new BABYLON.StandardMaterial("rockyMaterial", scene);
-  const rockyTexture = new BABYLON.Texture("./asset/textures/rocky_texture.png", scene); // Remplacez "textures/rocky.jpg" par le chemin de votre texture rocailleuse
+  const rockyTexture = new BABYLON.Texture("../asset/textures/rocky_texture.png", scene); // Remplacez "textures/rocky.jpg" par le chemin de votre texture rocailleuse
   rockyMaterial.diffuseTexture = rockyTexture;
 
-  const rockyLeft = new BABYLON.MeshBuilder.CreateGroundFromHeightMap('', './asset/textures/rocky_texture.png',{
+  const rockyLeft = new BABYLON.MeshBuilder.CreateGroundFromHeightMap('', '../asset/textures/rocky_texture.png',{
   height: 1000,
   width: 5,
   subdivisions: 600,
   maxHeight: 4
   });
 
-  const rockyRight = new BABYLON.MeshBuilder.CreateGroundFromHeightMap('', './asset/textures/rocky_texture.png',{
+  const rockyRight = new BABYLON.MeshBuilder.CreateGroundFromHeightMap('', '../asset/textures/rocky_texture.png',{
     height: 1000,
     width: 5,
     subdivisions: 600,
@@ -60,7 +60,7 @@ const createScene = function () {
 
  
   // Import the guidon mesh
-  BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Guidon.glb", scene, function (newMeshes) {
+  BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Guidon.glb", scene, function (newMeshes) {
     // Access the imported mesh
     var guidon = newMeshes[0];
     guidon.position.y = 2.5;
@@ -88,7 +88,7 @@ const createScene = function () {
 
     // Create multiple pieces
     for (let i = 0; i < 5; i++) {
-      BABYLON.SceneLoader.ImportMesh("", "./asset/import/", "Piece.glb", scene, function (newMeshes) {
+      BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Piece.glb", scene, function (newMeshes) {
         var piece = newMeshes[0];
         piece.position.y = 1.8;
         piece.position.x = Math.random() * 6 - 3; // Random x position within the width of the road
