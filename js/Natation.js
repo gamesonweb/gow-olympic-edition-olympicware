@@ -15,16 +15,6 @@ const createScene = function () {
     const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 1;
 
-    // GUI
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-    //Titre du jeu
-    var title = new BABYLON.GUI.TextBlock();
-    title.text = "Dépasse le nageur !";
-    title.color = "white";
-    title.fontSize = 68;
-    title.top = "-300px"; // Set the position in the y-axis
-    advancedTexture.addControl(title);
-
     // Créer une piscine
     const pool = BABYLON.MeshBuilder.CreateBox("pool", { width: 11.5, height: 0.1, depth: 20 }, scene);
     pool.position.y = -6; // Positionner la piscine en hauteur
@@ -135,39 +125,62 @@ const createScene = function () {
     scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
         inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
     }));
+    // GUI
+    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    // Afficher le message pendant 5 secondes
+    var title = new BABYLON.GUI.TextBlock();
+    title.text = "Dépasse le nageur !";
+    title.color = "white";
+    title.fontSize = 25;
+    title.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    advancedTexture.addControl(title);
+
+    
 
     // Load hero character and play animation
-    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Nageur3.glb", scene, function (newMeshes, particleSystems, skeletons, animationGroups) {
-        var swimmer = newMeshes[0];
-        swimmer.position = new BABYLON.Vector3(1.5, -1.3, -8.6); // Positionner le nageur au centre de la piscine
-        var swimmer2 = swimmer.clone("swimmer2");
+    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Nageur3.glb", scene, function (newMeshes) {
+        var swimmer2 = newMeshes[0];
         swimmer2.position = new BABYLON.Vector3(-1.5, -1.3, -8.6); // Positionner le nageur à gauche de la piscine
         // Get the specific animation from the animation group
         var wait = scene.getAnimationGroupByName("Wait");
         // Start the animation
         wait.start(true, 1.0, wait.from, wait.to, false);
 
-    // Afficher le message pendant 5 secondes
+        setTimeout(function () {
+            advancedTexture.removeControl(title); // Supprimer le message
+            wait.stop(); // Stop the animation
+            // Get the specific animation from the animation group
+            var swim2 = scene.getAnimationGroupByName("Swim.001");
+            // Start the animation
+            swim2.start(true, 1.0, swim2.from, swim2.to, false);
+            // Move the swimmer forward during the animation
+            scene.registerBeforeRender(function () {
+                if (swimmer2.position.z < poolUp.position.z - 3.5 + poolUp.scaling.z / 2 - swimmer2.scaling.z / 2) {
+                    swimmer2.position.z += 0.02; // Adjust the value to control the speed of movement
+                } else {
+                    swim2.stop(); // Stop the animation when the swimmer reaches the pool
+                }
+            });
+
+        }, 5000);
+    });
+
+// Load hero character and play animation
+BABYLON.SceneLoader.ImportMesh("", "../asset/", "Nageur3.glb", scene, function (newMeshes) {
+    var swimmer = newMeshes[0];
+    swimmer.position = new BABYLON.Vector3(1.5, -1.3, -8.6); // Positionner le nageur à droite de la piscine
+    // Get the specific animation from the animation group
+    var wait = scene.getAnimationGroupByName("Wait");
+    // Start the animation
+    wait.start(true, 1.0, wait.from, wait.to, false);
+
     setTimeout(function () {
         advancedTexture.removeControl(title); // Supprimer le message
         wait.stop(); // Stop the animation
         // Get the specific animation from the animation group
-        var swim2 = scene.getAnimationGroupByName("Swim.001");
-        // Start the animation
-        swim2.start(true, 1.0, swim2.from, swim2.to, false);
-        // Move the swimmer forward during the animation
-        scene.registerBeforeRender(function () {
-            if (swimmer2.position.z < poolUp.position.z - 3.5 + poolUp.scaling.z / 2 - swimmer2.scaling.z / 2) {
-                swimmer2.position.z += 0.02; // Adjust the value to control the speed of movement
-            } else {
-                swim2.stop(); // Stop the animation when the swimmer reaches the pool
-            }
-        });
-        // Get the specific animation from the animation group
         var swim = scene.getAnimationGroupByName("Swim.001");
-        var swimmer = newMeshes[0];
-        swimmer.position = new BABYLON.Vector3(1.5, -1.3, -8.6); 
-
+        // Start the animation
+        swim.start(true, 1.0, swim.from, swim.to, false);
         let isSwimming = false;
         scene.onKeyboardObservable.add((kbInfo) => {
             switch (kbInfo.type) {
@@ -204,9 +217,7 @@ const createScene = function () {
         });
 
     }, 5000);
-    });
-
-
+});
 
     camera.position = new BABYLON.Vector3(0, 3.5, -15); // Eloigner la caméra de la piscine
     camera.target = water.position; // Cibler la piscine avec la caméra

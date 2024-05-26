@@ -48,7 +48,7 @@ const createScene = function () {
   // Add a timer to return to the previous page after 10 seconds
   /*setTimeout(function() {
     window.history.back();
-  }, 5000);*/
+  }, 20000);*/
 
   // Add event listener for mouse movement
   canvas.addEventListener("mousemove", function () {

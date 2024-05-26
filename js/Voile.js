@@ -67,7 +67,7 @@ var createScene = function () {
             cylinder.position.x = Math.random() * 70 - 30; // Random x position between -40 and 40
             cylinder.position.z = Math.random() * 80 - 40; // Random z position between -40 and 40
             cylinder.material = new BABYLON.StandardMaterial("cylinderMaterial", scene);
-            cylinder.material.diffuseTexture = new BABYLON.Texture("../asset/textures./albedo.png", scene); // Set cylinder texture to bois.jpg
+            cylinder.material.diffuseTexture = new BABYLON.Texture("../asset/textures/albedo.png", scene); // Set cylinder texture to bois.jpg
         }
 
         // Keyboard events

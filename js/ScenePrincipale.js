@@ -136,25 +136,26 @@ const createScene = function () {
     });
   }
 
-  // Au bout de 5 secondes, rediriger vers un site au hasard avec un paramètre aléatoire
-  const params = ["arc", "tennis", "natation","golf","foot","escalade","voile","halterophilie","cyclisme"]; // Tableau des paramètres possibles
+ // Au chargement de la page, récupérer le nombre de redirections depuis le stockage local
+let redirectionCounter = parseInt(localStorage.getItem("redirectionCounter")) || 0;
+
+// Au bout de 5 secondes, rediriger vers un site au hasard avec un paramètre aléatoire
+const params = ["arc", "tennis", "natation","golf","foot","escalade","voile","halterophilie","cyclisme"]; // Tableau des paramètres possibles
+
+setTimeout(() => {
   const randomParam = params[Math.floor(Math.random() * params.length)]; // Sélectionner un paramètre aléatoire
-  let redirectionCounter = 0; // Compteur de redirections
 
-  const redirect = function () {
-    if (redirectionCounter < 8) { // Vérifier si le nombre de redirections est inférieur à 8
-      window.location.href = "./html/OlympicWare.html#" + randomParam;
-      redirectionCounter++;
-      console.log("Nombre de redirections: " + redirectionCounter); // Afficher le nombre de redirections
-      counterElement.textContent = " Nombre de redirections: " + redirectionCounter;
-    }
-    else {
-      console.log("Nombre de redirections maximum atteint.");
-      window.location.href = "../index.html";
-    }
-  };
-
-  //setTimeout(redirect, 5000); // Rediriger après 5 secondes
+  if (redirectionCounter < 8) { // Vérifier si le nombre de redirections est inférieur à 8
+    window.location.href = "./OlympicWare.html#" + randomParam;
+    redirectionCounter++;
+    console.log("Nombre de redirections: " + redirectionCounter); // Afficher le nombre de redirections
+    localStorage.setItem("redirectionCounter", redirectionCounter); // Stocker le nombre de redirections dans le stockage local
+    counterElement.textContent = " Nombre de redirections: " + redirectionCounter;
+  } else {
+    console.log("Nombre de redirections maximum atteint.");
+    window.location.href = "../index.html";
+  }
+}, 5000); // Rediriger après 5 secondes
 
 
   // Ajouter un compteur de temps
