@@ -173,7 +173,7 @@ const createScene = function () {
 scene.registerBeforeRender(function () {
   guidon.position.z -= 0.5;
   camera.target.z = guidon.position.z - 6.2;
-
+  //pieces.rotate(BABYLON.Axis.Z, 0.1);
   var tolerance_piece = 2; // Tolérance pour la distance en 3D
   var tolerance_rocher = 2.5; // Tolérance pour la position en y
 
