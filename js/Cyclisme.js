@@ -189,7 +189,7 @@ scene.registerBeforeRender(function () {
       pieces.splice(i, 1); // Retirer la pièce du tableau
       // Ajouter un son lorsqu'une pièce est collectée
       const audio = new Audio("../asset/sons/collectcoin.wav");
-      audio.play();
+      //audio.play();
     }
   }
 
