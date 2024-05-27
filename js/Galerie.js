@@ -202,6 +202,26 @@ var createScene = function () {
     advancedTexture.addControl(image8Container);
     advancedTexture.addControl(image8);
 
+    // Create an image for Game 9
+    var image9 = new BABYLON.GUI.Image("image9", "../asset/galerie/Halteres.png");
+    image9.width = "150px";
+    image9.height = "150px";
+    image9.left = "-400px"; // Position the image next to the third image
+    image9.top = "-35px";
+    image9.onPointerUpObservable.add(function () {
+        // Code to start Game 9
+        window.location.href = "../html/OlympicWare.html#halterophilie";
+    });
+    var image9Container = new BABYLON.GUI.Rectangle();
+    image9Container.width = "155px";
+    image9Container.height = "155px";
+    image9Container.thickness = 2;
+    image9Container.color = "white";
+    image9Container.left = "-400px"; // Position the image next to the third image
+    image9Container.top = "-35px";
+    advancedTexture.addControl(image9Container);
+    advancedTexture.addControl(image9);
+
     return scene;
 };
 

@@ -113,7 +113,7 @@ buttonElement.addEventListener("click", () => {
 
 });
 menuElement.appendChild(buttonElement);
-
+/*
 // Creer le menu pour afficher les succes
 const succesElement = document.createElement("ul");
 succesElement.id = "succes";
@@ -173,4 +173,4 @@ succesElement.addEventListener("mouseleave", () => {
 // Add the dropdown to the success element
 succesElement.appendChild(dropdownElement);
 
-menuElement.appendChild(succesElement);
+menuElement.appendChild(succesElement);*/

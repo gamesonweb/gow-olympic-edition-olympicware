@@ -8,7 +8,7 @@ var createScene = function () {
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
     // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1, 30), scene);
+    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, 80), scene);
     // This targets the camera to scene origin
     camera.setTarget(BABYLON.Vector3.Zero());
     // This attaches the camera to the canvas
@@ -16,7 +16,7 @@ var createScene = function () {
     camera.inputs.clear(); // Disable camera controls
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-    
+
     // Create skybox
     var skybox = BABYLON.MeshBuilder.CreateBox("skybox", { size: 1000 }, scene);
     var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
@@ -35,21 +35,26 @@ var createScene = function () {
     textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
     textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP; // Change alignment to top
     advancedTexture.addControl(textBlock);
-    
+
     // Create ground
     var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 100 }, scene);
     ground.material = new BABYLON.StandardMaterial("groundMaterial", scene);
     ground.material.diffuseColor = new BABYLON.Color3(0.76, 0.69, 0.57);
-    
-     // Importer le voilier
-     BABYLON.SceneLoader.ImportMesh("", "../asset/", "Halteres.glb", scene, function (newMeshes) {
+    ground.checkCollisions = true;
+    // Importer l'haltere'
+    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Halteres.glb", scene, function (newMeshes) {
         var haltere = newMeshes[0];
         haltere.position.y = 1;
-
-
+    });
+        BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Halterophilie.glb", scene, function (newMeshes, particleSystems, skeletons) {
+            var athlete = newMeshes[0];
+            athlete.position.y = 0;
+            athlete.position.z = 15;
+    
         });
-    
-    
+       
+
+
     return scene;
 }
 
@@ -71,4 +76,4 @@ if (hash.includes('halterophilie')) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     document.getElementById('menu').appendChild(canvas);
-  }
+}
