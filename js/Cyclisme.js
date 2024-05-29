@@ -1,8 +1,10 @@
-var canvas = document.createElement("canvas");
-canvas.id = "cyclisme";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine 
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
 
+  if (hash.includes('cyclisme')) {
+      var canvas = document.createElement("canvas");
+      canvas.id = "cyclisme";
+      const engine = new BABYLON.Engine(canvas, true);
 const createScene = function () {
   engine.enableOfflineSupport = false;
   const scene = new BABYLON.Scene(engine);
@@ -189,7 +191,7 @@ scene.registerBeforeRender(function () {
       pieces.splice(i, 1); // Retirer la pièce du tableau
       // Ajouter un son lorsqu'une pièce est collectée
       const audio = new Audio("../asset/sons/collectcoin.wav");
-      //audio.play();
+      audio.play();
     }
   }
 
@@ -235,11 +237,11 @@ window.addEventListener("resize", function () {
   engine.resize();
 });
 
-if (hash.includes('cyclisme')) {
   // Show the canvas
   canvas.style.display = "block";
   // Set the canvas size to match the window size
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   document.getElementById('menu').appendChild(canvas);
-}
+} 
+});

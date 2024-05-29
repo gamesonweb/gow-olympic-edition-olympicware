@@ -1,7 +1,10 @@
-var canvas = document.createElement("canvas");
-canvas.id = "escalade";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+
+    if (hash.includes('escalade')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "escalade";
+        const engine = new BABYLON.Engine(canvas, true);
 
 var createScene = function () {
 
@@ -67,7 +70,6 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-if (hash.includes('escalade')) {
     // Show the canvas
     canvas.style.display = "block";
     // Set the canvas size to match the window size
@@ -75,3 +77,4 @@ if (hash.includes('escalade')) {
     canvas.height = window.innerHeight;
     document.getElementById('menu').appendChild(canvas);
   }
+});

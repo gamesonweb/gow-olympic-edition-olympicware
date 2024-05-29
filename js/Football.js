@@ -1,7 +1,10 @@
-var canvas = document.createElement("canvas");
-canvas.id = "foot";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-const hash = window.location.hash; // Declare the hash variable and assign it the value of the URL anchor
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+
+    if (hash.includes('foot')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "foot";
+        const engine = new BABYLON.Engine(canvas, true);
 
 var createScene = function () {
 
@@ -122,7 +125,6 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-if (hash.includes('foot')) {
     // Show the canvas
     canvas.style.display = "block";
     // Set the canvas size to match the window size
@@ -131,3 +133,4 @@ if (hash.includes('foot')) {
     document.getElementById('menu').appendChild(canvas);
 
 }
+});

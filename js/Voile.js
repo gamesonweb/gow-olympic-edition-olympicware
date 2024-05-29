@@ -1,8 +1,10 @@
-var canvas = document.createElement("canvas");
-canvas.id = "voile";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
 
+    if (hash.includes('voile')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "voile";
+        const engine = new BABYLON.Engine(canvas, true);
 var createScene = function () {
 
     // This creates a basic Babylon Scene object (non-mesh)
@@ -101,11 +103,11 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-if (hash.includes('voile')) {
     // Show the canvas
     canvas.style.display = "block";
     // Set the canvas size to match the window size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     document.getElementById('menu').appendChild(canvas);
-}
+} 
+});

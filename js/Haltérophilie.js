@@ -1,79 +1,132 @@
-var canvas = document.createElement("canvas");
-canvas.id = "halterophilie";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', (event) => {
+    const hash = window.location.hash;
 
-var createScene = function () {
+    if (hash.includes('halterophilie')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "halterophilie";
+        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
-    // This creates a basic Babylon Scene object (non-mesh)
-    var scene = new BABYLON.Scene(engine);
-    // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, 80), scene);
-    // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
-    // This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
-    camera.inputs.clear(); // Disable camera controls
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+        var createScene = function () {
+            var scene = new BABYLON.Scene(engine);
 
-    // Create skybox
-    var skybox = BABYLON.MeshBuilder.CreateBox("skybox", { size: 1000 }, scene);
-    var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
-    skyboxMaterial.backFaceCulling = false;
-    skyboxMaterial.diffuseColor = new BABYLON.Color3(0.5, 0.8, 0); // Light yellow color
-    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    skybox.material = skyboxMaterial;
+            var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 30, 80), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
+            camera.attachControl(canvas, true);
+            camera.inputs.clear(); // Disable camera controls
 
-    // Create GUI
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-    var textBlock = new BABYLON.GUI.TextBlock();
-    textBlock.text = "OlympicWare";
-    textBlock.color = "white";
-    textBlock.fontSize = 40;
-    textBlock.fontFamily = "Arial";
-    textBlock.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-    textBlock.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP; // Change alignment to top
-    advancedTexture.addControl(textBlock);
+            var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
 
-    // Create ground
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 100 }, scene);
-    ground.material = new BABYLON.StandardMaterial("groundMaterial", scene);
-    ground.material.diffuseColor = new BABYLON.Color3(0.76, 0.69, 0.57);
-    ground.checkCollisions = true;
-    // Importer l'haltere'
-    BABYLON.SceneLoader.ImportMesh("", "../asset/", "Halteres.glb", scene, function (newMeshes) {
-        var haltere = newMeshes[0];
-        haltere.position.y = 1;
-    });
-        BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Halterophilie.glb", scene, function (newMeshes, particleSystems, skeletons) {
-            var athlete = newMeshes[0];
-            athlete.position.y = 0;
-            athlete.position.z = 15;
-    
+            var skybox = BABYLON.MeshBuilder.CreateBox("skybox", { size: 1000 }, scene);
+            var skyboxMaterial = new BABYLON.StandardMaterial("skyboxMaterial", scene);
+            skyboxMaterial.backFaceCulling = false;
+
+            var dynamicTexture = new BABYLON.DynamicTexture("dynamicTexture", 1024, scene, true);
+            var context = dynamicTexture.getContext();
+            context.fillStyle = "green"; // Background color
+            context.fillRect(0, 0, 1024, 1024); // Fill the background
+            context.font = "bold 60px Arial";
+            context.fillStyle = "white";
+            context.textAlign = "center";
+            context.translate(512, 512); // Move the origin to the center of the canvas
+            context.scale(-1, 1); // Flip the text
+            context.fillText("OlympicWare", 0, 0); // Center the text in the middle of the texture
+            dynamicTexture.update();
+            skyboxMaterial.diffuseTexture = dynamicTexture;
+            skybox.material = skyboxMaterial;
+
+            var ground = BABYLON.MeshBuilder.CreateGround("ground", { width: 1000, height: 100 }, scene);
+            ground.material = new BABYLON.StandardMaterial("groundMaterial", scene);
+            ground.material.diffuseColor = new BABYLON.Color3(0.76, 0.69, 0.57);
+            ground.checkCollisions = true;
+
+            BABYLON.SceneLoader.ImportMesh("", "../asset/", "Halteres.glb", scene, function (newMeshes) {
+                var haltere = newMeshes[0];
+                haltere.position.y = 1;
+            });
+
+            BABYLON.SceneLoader.ImportMesh("", "../asset/import/", "Halterophilie.glb", scene, function (newMeshes) {
+                console.log(newMeshes);
+                var athlete = newMeshes[0];
+                athlete.position.y = 0;
+                athlete.position.z = 15;
+
+                var soulever = scene.getAnimationGroupByName("Souleve");
+                soulever.start(true, 1.0, soulever.from, soulever.to, false);
+                setTimeout(() => {
+                    var pose = scene.getAnimationGroupByName("Souleve.002");
+                    pose.start(true);
+
+                    var cylindres = newMeshes.filter(mesh => mesh.name.startsWith("Cylindre_"));
+                    console.log(cylindres);
+
+                    cylindres.forEach((mesh, index) => {
+                        animateMesh(mesh);
+                    });
+
+                    // Déplacer l'athlète avec les touches du clavier
+                    window.addEventListener("keydown", (event) => {
+                        switch (event.key) {
+                            case 'ArrowRight':
+                                if (athlete.position.x > -35) {
+                                    athlete.position.x -= 1;
+                                }console.log(athlete.position.x);
+                                break;
+                            case 'ArrowLeft':
+                                if (athlete.position.x < 35) {
+                                    athlete.position.x += 1;
+                                }console.log(athlete.position.x);
+                                break;
+                        }
+                    });
+
+                }, 5000);
+
+                
+            });
+
+            return scene;
+        }
+
+        function animateMesh(mesh) {
+            var frameRate = 10;
+            var xSlide = new BABYLON.Animation("xSlide", "position.z", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+
+            var keyFrames = [];
+
+            keyFrames.push({
+                frame: 0,
+                value: -Math.PI / 4
+            });
+
+            keyFrames.push({
+                frame: frameRate,
+                value: Math.PI / 4
+            });
+
+            keyFrames.push({
+                frame: 2 * frameRate,
+                value: -Math.PI / 4
+            });
+
+            xSlide.setKeys(keyFrames);
+
+            mesh.animations.push(xSlide);
+            scene.beginAnimation(mesh, 0, 2 * frameRate, true);
+        }
+
+        const scene = createScene(); // Appeler la fonction createScene
+
+        engine.runRenderLoop(function () {
+            scene.render();
         });
-       
 
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
 
-    return scene;
-}
-
-const scene = createScene(); // Appeler la fonction createScene
-// Register a render loop to repeatedly render the scene
-engine.runRenderLoop(function () {
-    scene.render();
+        canvas.style.display = "block";
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.getElementById('menu').appendChild(canvas);
+    }
 });
-
-// Watch for browser/canvas resize events
-window.addEventListener("resize", function () {
-    engine.resize();
-});
-
-if (hash.includes('halterophilie')) {
-    // Show the canvas
-    canvas.style.display = "block";
-    // Set the canvas size to match the window size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    document.getElementById('menu').appendChild(canvas);
-}

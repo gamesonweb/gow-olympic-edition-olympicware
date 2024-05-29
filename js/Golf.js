@@ -1,7 +1,10 @@
-var canvas = document.createElement("canvas");
-canvas.id = "golf";
-const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', (event) => {
+    const hash = window.location.hash;
+
+    if (hash.includes('halterophilie')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "halterophilie";
+        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
 var createScene = function () {
 
@@ -99,7 +102,6 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-if (hash.includes('golf')) {
     // Show the canvas
     canvas.style.display = "block";
     // Set the canvas size to match the window size
@@ -107,3 +109,4 @@ if (hash.includes('golf')) {
     canvas.height = window.innerHeight;
     document.getElementById('menu').appendChild(canvas);
   }
+});

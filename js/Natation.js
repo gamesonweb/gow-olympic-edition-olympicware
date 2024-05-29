@@ -1,8 +1,10 @@
-// Mettre un systeme type guitar hero pour le fun du gameplay
-var canvas = document.createElement("canvas");
-canvas.id = "natation";
-const engine = new BABYLON.Engine(canvas, true); // Générer le moteur 3D BABYLON
-const hash = window.location.hash;
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+
+    if (hash.includes('natation')) {
+        var canvas = document.createElement("canvas");
+        canvas.id = "natation";
+        const engine = new BABYLON.Engine(canvas, true);
 
 const createScene = function () {
     const scene = new BABYLON.Scene(engine);
@@ -237,7 +239,6 @@ window.addEventListener("resize", function () {
     engine.resize();
 });
 
-if (hash.includes('natation')) {
     // Show the canvas
     canvas.style.display = "block";
     // Set the canvas size to match the window size
@@ -245,3 +246,4 @@ if (hash.includes('natation')) {
     canvas.height = window.innerHeight;
     document.getElementById('menu').appendChild(canvas);
 }
+});
