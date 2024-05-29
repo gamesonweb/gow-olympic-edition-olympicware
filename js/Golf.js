@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const hash = window.location.hash;
 
-    if (hash.includes('halterophilie')) {
+    if (hash.includes('golf')) {
         var canvas = document.createElement("canvas");
-        canvas.id = "halterophilie";
+        canvas.id = "golf";
         const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
 var createScene = function () {
