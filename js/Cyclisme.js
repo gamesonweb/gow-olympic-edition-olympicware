@@ -173,7 +173,7 @@ const createScene = function () {
 
 // Ajout de la vérification d'intersection dans la boucle de rendu
 scene.registerBeforeRender(function () {
-  guidon.position.z -= 0.5;
+  guidon.position.z -= 0.2;
   camera.target.z = guidon.position.z - 6.2;
   //pieces.rotate(BABYLON.Axis.Z, 0.1);
   var tolerance_piece = 2; // Tolérance pour la distance en 3D
@@ -219,10 +219,10 @@ scene.registerBeforeRender(function () {
 
   });
 
-  /*setTimeout(function () {
+  setTimeout(function () {
     window.history.back();
-  }, 25000);
-*/
+  }, 10000);
+
   return scene;
 }
 

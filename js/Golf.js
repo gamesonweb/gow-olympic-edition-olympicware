@@ -87,7 +87,11 @@ canvas.addEventListener("click", function(event) {
 
     camera.position = new BABYLON.Vector3(0, 20, -75); // Eloigner la caméra du terrain
     camera.target = ground.position;
-
+    
+// Add a timer to return to the previous page after 20 seconds
+setTimeout(function() {
+    window.history.back();
+  }, 15000);
     return scene;
 }
 

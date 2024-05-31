@@ -43,7 +43,7 @@ buttonElement.addEventListener("click", () => {
         titleElement.style.marginTop = "60px";
 
         // Create a button element
-        const button1Element = document.createElement("button");
+      /*  const button1Element = document.createElement("button");
         button1Element.id = "button";
         button1Element.style.top = "30%";
         button1Element.style.left = "50%";
@@ -82,7 +82,7 @@ buttonElement.addEventListener("click", () => {
             // Change the image of the button
             image2Element.src = "../asset/icones/icons8-pas-de-son-32.png";
             image2Element.alt = "Muted";
-        });
+        });*/
 
         // Create a third button element
         const button3Element = document.createElement("button");
@@ -104,8 +104,8 @@ buttonElement.addEventListener("click", () => {
 
         // Add the title and buttons to the rectangle element
         rectangleElement.appendChild(titleElement);
-        rectangleElement.appendChild(button1Element);
-        rectangleElement.appendChild(button2Element);
+        //rectangleElement.appendChild(button1Element);
+        //rectangleElement.appendChild(button2Element);
         rectangleElement.appendChild(button3Element);
 
         menuElement.appendChild(rectangleElement);

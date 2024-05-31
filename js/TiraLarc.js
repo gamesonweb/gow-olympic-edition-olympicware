@@ -17,27 +17,39 @@ document.addEventListener('DOMContentLoaded', () => {
       const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0));
       light.intensity = 2;
 
-      // Create the ellipse
-      const ellipse = BABYLON.MeshBuilder.CreateDisc("ellipse", { radius: 5, tessellation: 32 }, scene);
-      ellipse.position.y = 10;
-      ellipse.position.z = 10;
-      ellipse.material = new BABYLON.StandardMaterial("ellipseMaterial", scene);
-      ellipse.material.diffuseColor = new BABYLON.Color3(1, 1, 1); // Set the color of the ellipse
+      function createTarget(scene) {
+        const target = new BABYLON.TransformNode("target", scene);
 
-      // Create four smaller ellipses
-      const smallerEllipses = [];
-      const colors = [new BABYLON.Color3(0, 0, 0), new BABYLON.Color3(0, 0, 1), new BABYLON.Color3(1, 0, 0), new BABYLON.Color3(1, 1, 0)];
-      const radiusStep = 1;
+        const ellipse = BABYLON.MeshBuilder.CreateDisc("ellipse", { radius: 5, tessellation: 32 }, scene);
+        ellipse.parent = target;
+        ellipse.material = new BABYLON.StandardMaterial("ellipseMaterial", scene);
+        ellipse.material.diffuseColor = new BABYLON.Color3(1, 1, 1);
+        
+        const smallerEllipses = [];
+        const colors = [new BABYLON.Color3(0, 0, 0), new BABYLON.Color3(0, 0, 1), new BABYLON.Color3(1, 0, 0), new BABYLON.Color3(1, 1, 0)];
+        const radiusStep = 1;
 
-      for (let i = 0; i < 4; i++) {
-        const smallerEllipse = BABYLON.MeshBuilder.CreateDisc("smallerEllipse" + i, { radius: 5 - (i + 1) * radiusStep, tessellation: 32 }, scene);
-        smallerEllipse.position.y = 10;
-        smallerEllipse.position.z = 10;
-        smallerEllipse.material = new BABYLON.StandardMaterial("smallerEllipseMaterial" + i, scene);
-        smallerEllipse.material.diffuseColor = colors[i];
-        smallerEllipses.push(smallerEllipse);
-      }
-      camera.target = ellipse.position;
+        for (let i = 0; i < 4; i++) {
+            const smallerEllipse = BABYLON.MeshBuilder.CreateDisc("smallerEllipse" + i, { radius: 5 - (i + 1) * radiusStep, tessellation: 32 }, scene);
+            smallerEllipse.parent = target;
+            smallerEllipse.material = new BABYLON.StandardMaterial("smallerEllipseMaterial" + i, scene);
+            smallerEllipse.material.diffuseColor = colors[i];
+            smallerEllipses.push(smallerEllipse);
+
+        }
+        return target;
+    }
+
+    const target = createTarget(scene);
+
+    function positionTargetRandomly() {
+        const minX = -15, maxX = 15, minY = 0, maxY = 6;
+        target.position.x = Math.random() * (maxX - minX) + minX;
+        target.position.y = Math.random() * (maxY - minY) + minY;
+        target.position.z = 10;
+    }
+
+    setInterval(positionTargetRandomly, 2000);
 
       // Create a small transparent circle with black outline
       const smallCircle = BABYLON.MeshBuilder.CreateDisc("smallCircle", { radius: 0.7, tessellation: 32 }, scene);
@@ -47,10 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
       smallCircle.material.alpha = 0.5; // Set the transparency of the circle
       smallCircle.material.wireframe = true; // Display the circle as wireframe
 
-      // Add a timer to return to the previous page after 10 seconds
-      /*setTimeout(function() {
+      // Add a timer to return to the previous page after 20 seconds
+      setTimeout(function() {
         window.history.back();
-      }, 20000);*/
+      }, 20000);
 
       // Add event listener for mouse movement
       canvas.addEventListener("mousemove", function () {
@@ -66,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         smallCircle.position.x = pickedPoint.x;
         smallCircle.position.y = pickedPoint.y;
       });
+      let score = 0;
       // Add event listener for mouse click
       canvas.addEventListener("click", function () {
         const audio = new Audio("../asset/sons/arrow-shot.wav");
@@ -82,8 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
           fleche.position.x = pickedPoint.x;
           fleche.position.y = pickedPoint.y;
           fleche.position.z = 4;
+
+              score++;
+
+
         });
       });
+
+    
 
       return scene;
     };

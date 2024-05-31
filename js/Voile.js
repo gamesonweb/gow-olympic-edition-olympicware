@@ -88,7 +88,8 @@ var createScene = function () {
 
     });
 
-    //camera.target = water.position; // Faire en sorte que la caméra regarde l'eau
+C
+
     return scene;
 }
 

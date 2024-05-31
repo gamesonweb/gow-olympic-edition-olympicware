@@ -121,8 +121,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
 
         window.addEventListener("resize", function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             engine.resize();
         });
+
+        // Initial resize to ensure the canvas fits the screen
 
         canvas.style.display = "block";
         canvas.width = window.innerWidth;

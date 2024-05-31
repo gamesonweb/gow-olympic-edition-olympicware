@@ -45,7 +45,7 @@ var createScene = function () {
         window.location.href = "../index.html"; // Replace with the URL of your choice 1 page
     });
     // Create an image for Game 1
-    var image1 = new BABYLON.GUI.Image("image1", "../asset/galerie/Tennis.png");
+   /* var image1 = new BABYLON.GUI.Image("image1", "../asset/galerie/Tennis.png");
     image1.width = "150px";
     image1.height = "150px";
     image1.left = "-600px"; // Position the image on the left
@@ -61,7 +61,7 @@ var createScene = function () {
     image1Container.left = "-600px"; // Position the image on the left
     image1Container.top = "-280px"; // Position the image on the top
     advancedTexture.addControl(image1Container);
-    advancedTexture.addControl(image1);
+    advancedTexture.addControl(image1);*/
 
     // Create an image for Game 2
     var image2 = new BABYLON.GUI.Image("image2", "../asset/galerie/Arc.png");
@@ -82,7 +82,7 @@ var createScene = function () {
     advancedTexture.addControl(image2Container);
     advancedTexture.addControl(image2);
 
-    // Create an image for Game 3
+  /*  // Create an image for Game 3
     var image3 = new BABYLON.GUI.Image("image3", "../asset/galerie/Escalade.png");
     image3.width = "150px";
     image3.height = "150px";
@@ -100,7 +100,7 @@ var createScene = function () {
     image3Container.left = "-200px"; // Position the image next to the second image
     image3Container.top = "-280px";
     advancedTexture.addControl(image3Container);
-    advancedTexture.addControl(image3);
+    advancedTexture.addControl(image3);*/
 
     // Create an image for Game 4
     var image4 = new BABYLON.GUI.Image("image4", "../asset/galerie/Natation.png");
@@ -152,7 +152,7 @@ var createScene = function () {
         // Code to start Game 6
         window.location.href = "../html/OlympicWare.html#cyclisme";
     });
-    var image6Container = new BABYLON.GUI.Rectangle();
+   /* var image6Container = new BABYLON.GUI.Rectangle();
     image6Container.width = "155px";
     image6Container.height = "155px";
     image6Container.thickness = 2;
@@ -200,7 +200,7 @@ var createScene = function () {
     image8Container.left = "-600px"; // Position the image next to the third image
     image8Container.top = "-35px";
     advancedTexture.addControl(image8Container);
-    advancedTexture.addControl(image8);
+    advancedTexture.addControl(image8);*/
 
     // Create an image for Game 9
     var image9 = new BABYLON.GUI.Image("image9", "../asset/galerie/Halteres.png");
@@ -232,7 +232,12 @@ engine.runRenderLoop(function () {
     scene.render();
 });
 
-// Watch for browser/canvas resize events
 window.addEventListener("resize", function () {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     engine.resize();
 });
+
+// Initial resize to ensure the canvas fits the screen
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
