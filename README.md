@@ -14,3 +14,4 @@ Concept : Le jeu débute toujours sur une scène de stade olympique : Le personn
 
 Mode de jeu:
 Classique, un tour de piste (Réussir 8 mini-jeux)
+ lien du jeu : https://gamesonweb.github.io/gow-olympic-edition-olympicware/
